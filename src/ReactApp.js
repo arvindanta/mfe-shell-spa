@@ -1,45 +1,54 @@
 import React, { useRef, useEffect} from 'react'
 import { MFEController } from "./controller";
+import { defineCustomElement} from "@freshworksinc/platform-application/dist/components/mfe-application"
+defineCustomElement()
 
 function ReactApp(props) {
     const ref = useRef(null)
     console.log('rendering ', props)
     useEffect(() =>{
         ref.current.appProps={
-            routerBasePath:"/accounts/react1"
+            //routerBasePath:"/accounts/react1",
+            test: 1,
+            test1: 'tsdasd',
         }
     },[])
   return (
     <div>
       <button onClick={() => {
          MFEController?.__mfe_publish?.({
-          action: {
-            type: "navigate",
-            sender: "root",
-            receiver: "reactForm",
-          },
-          payload: { from: "/accounts/react1", to: '/about'},
-          senderOrigin: window.origin,
-          targetOrigin: "http://localhost:3333",
+          eventName: 'ROUTE_CHANGE',
+            action: {
+              type: 'navigate',
+              sender: 'root',
+              receiver: 'reactForm',
+            },
+            payload: { from: '', to: '/about' },
         });
       }}>Go to about page </button>
       
-        <mfe-application
-            app-id="reactForm"
-            app-name="react form"
-            ref={ref}
-            key={props.to}
-         >
-        </mfe-application>
+      <mfe-application
+      app-id="reactForm"
+      instance-id="mfe1"
+      ref={ref}
+      id="x"
+      iframe
+      host-url="http://localhost:9003"
+      iframe-src="http://localhost:9003"
+      version="0.1.1"
+    >
+    </mfe-application>
 
         <br/><br/>
      WC
-        <mfe-application
-    app-id="web12"
-    app-name="web compomnents"
-
- > 
-</mfe-application> 
+     <mfe-application
+      app-id="web12"
+      instance-id="mfe2"
+      id="y"
+      host-url="http://localhost:9002"
+      version="0.1.1"
+    >
+    </mfe-application>
     </div>
   )
 }

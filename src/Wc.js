@@ -5,6 +5,7 @@ function Wc() {
     <div> <mfe-application
     app-id="web12"
     app-name="web compomnents"
+    iframe
 
  >
 </mfe-application></div>

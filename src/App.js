@@ -13,9 +13,22 @@ function App() {
   let navigate = useNavigate();
   let [to,setTo] = useState('');
   
-  useEffect(() =>{
-    console.log("xxx ", MFEController)
-    MFEController?.__mfe_subscribe('root', (ev) => {
+  useEffect(() => {
+
+   MFEController.__mfe_subscribe('from_child_webc', (ev) => {
+      console.log('from_child_webc ', ev);
+    });
+
+   MFEController.__mfe_subscribe('from_child_react', (ev) => {
+      console.log('from_child_react ', ev);
+    });
+
+   MFEController.__mfe_subscribe('from_child_react1', (ev) => {
+      console.log('from_child_react1 ', ev);
+    });
+
+
+    MFEController?.__mfe_subscribe('ROUTE_CHANGE1', (ev) => {
       console.log('root ', ev);
 
       if (ev) {
@@ -27,13 +40,12 @@ function App() {
           setTo(to);
 
           //document.querySelector('#reactForm').remove();
-        //  window.history.pushState(null, '', to);
+        // history.pushState(null, '', to);
         
         }
       }
     });
   }, [navigate])
-  console.log("xlskdk")
   return (
     <div className="App">
       <h1> Common app shell coude</h1>
