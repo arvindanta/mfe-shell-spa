@@ -3,14 +3,16 @@ import { MFEController } from "./controller";
 import { defineCustomElement} from "@freshworksinc/platform-application/dist/components/mfe-application"
 defineCustomElement()
 
+
 function ReactApp(props) {
     const ref = useRef(null)
     console.log('rendering ', props)
     useEffect(() =>{
-        ref.current.appProps={
-            //routerBasePath:"/accounts/react1",
+        ref.current.appProps= {
+            routerBasePath:"/accounts/react1",
             test: 1,
             test1: 'tsdasd',
+            i18nStrings: "json"
         }
     },[])
   return (
@@ -22,6 +24,9 @@ function ReactApp(props) {
               type: 'navigate',
               sender: 'root',
               receiver: 'reactForm',
+              cb:() =>{
+                
+              }
             },
             payload: { from: '', to: '/about' },
         });
@@ -36,10 +41,10 @@ function ReactApp(props) {
       host-url="http://localhost:9003"
       iframe-src="http://localhost:9003"
       version="0.1.1"
-    >
-    </mfe-application>
+      >
+      </mfe-application>
 
-        <br/><br/>
+        {/* <br/><br/>
      WC
      <mfe-application
       app-id="web12"
@@ -48,7 +53,7 @@ function ReactApp(props) {
       host-url="http://localhost:9002"
       version="0.1.1"
     >
-    </mfe-application>
+    </mfe-application> */}
     </div>
   )
 }
